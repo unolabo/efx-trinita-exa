@@ -219,6 +219,6 @@ python trinitaHexGen.py dmem.bin
 | ------ | ------ |
 | Trinita IP コア 開発元・技術問い合わせ | [株式会社ウーノラボ ](https://www.unolabo.co.jp/) |
 | Efinix FPGA / 評価ボードのオンライン購入 | [コアスタッフ Efinix製品ページ](https://www.zaikostore.com/zaikostore/special/EFINIX) |
-| Efinix FPGA 取扱代理店 | [加賀デバイス](https://www.kgdev.co.jp/) |
+| Efinix FPGA 取扱代理店 | [加賀デバイス株式会社](https://www.kgdev.co.jp/category/column/efinix/) |
 
 
