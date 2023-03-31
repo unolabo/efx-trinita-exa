@@ -1,0 +1,5 @@
+09:43:58 **** Clean-only build of configuration Default for project gpioDemo ****
+make clean 
+
+09:43:59 Build Finished. 0 errors, 0 warnings. (took 144ms)
+

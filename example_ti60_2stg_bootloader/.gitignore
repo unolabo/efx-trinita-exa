@@ -1,0 +1,7 @@
+outflow/*
+!outflow/*.bin
+!outflow/*.hex
+work_dbg/
+work_pnr/
+work_pt/
+work_syn/

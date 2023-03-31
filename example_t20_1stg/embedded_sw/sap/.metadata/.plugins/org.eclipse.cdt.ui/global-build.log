@@ -1,0 +1,7 @@
+13:42:27 **** Build of configuration Default for project gpioDemo ****
+make all 
+CC src/main.c
+LD gpioDemo
+Memory region         Used Size  Region Size  %age Used
+             ROM:        1748 B        32 KB      5.33%
+             RAM:         212 B        32 KB      0.65%
