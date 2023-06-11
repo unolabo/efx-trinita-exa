@@ -112,20 +112,26 @@ python sap2tri.py sap.v
 
 ### 3. トップデザインにクロックを追加する
 
+1. Efinity を起動して、プロジェクトを開きます。
+
 Trinita コアは、クロックを 2 本使用します。
 
 - io_systemClk  : メインクロック
 - io_systemClk2 : メインクロックと同周期の位相をシフトしたクロック
 
-1. トップデザインの入力ポートとして io_systemClk2 を追加します。
-2. SoC のインスタンスに io_systemClk2 を接続します。
-3. Efinity Interface Designer を開き、PLL に io_SystemClk2 を追加します。
+2. トップデザインの入力ポートとして io_systemClk2 を追加します。
+3. SoC のインスタンスに io_systemClk2 を接続します。
+4. Efinity Interface Designer を開き、PLL に io_SystemClk2 を追加します。
 
 io_systemClk2 の推奨位相は下記のとおりです。
-- Trion T20 25MHz : 180 deg
-- Titanium Ti60 75MHz : 225 deg
+- Trion T20 25 MHz
+  - io_systemClk : 135 deg
+  - io_systemClk2 : 0 deg
+- Titanium Ti60 75MHz
+  - io_systemClk : 0 deg
+  - io_systemClk2 : 225 deg
 
-4. constraint.sdc に io_systemClk2 の定義を追加します。
+5. constraint.sdc に io_systemClk2 の定義を追加します。
 
 - お使いのデザイン規模・動作周波数に合わせて、io_systemClk - io_systemClk2 間のデータ受け渡しタイミングがミートするように位相を決定します。
 - 何度かコンパイルし、timing report (slack) をチェックして、位相を決定します。
@@ -156,13 +162,17 @@ io_systemClk2 の推奨位相は下記のとおりです。
 
 ※ デバイスが Titanium のときは TRION マクロを定義しないてください。
 
-2. トップデザインに下記の 1 行を追加します。
+2. プロジェクトに ./rtlip/vr_wrapper_efinix_time_encrypted.v を追加します。
+
+![image](./images/efx_project_add.png)
+
+3. トップデザインに下記の 1 行を追加します。
 
 ```verilog
 `include "trinita_define.vh"
 ```
 
-3. Efinity で File - Edit Project を選択し、include dir に trinita_define.vh の保存場所(フォルダ) を追加します。
+4. Efinity で File - Edit Project を選択し、include dir に trinita_define.vh の保存場所(フォルダ) を追加します。
 この例では、Efinity プロジェクトと同じ場所になるので "." が追加されています。
 
 ![image](./images/efx_project_edit.png)
@@ -180,21 +190,16 @@ io_systemClk2 の推奨位相は下記のとおりです。
 5. gpioDemo/build 配下に imem.bin と dmem.bin が出力されます。
 6. imem.bin と dmem.bin を ./romdata にコピーします。
 7. コマンドプロンプトを開き、./romdata に移動します。
-8. 下記コマンドを実行し、Trinita コアの IMEM / DMEM に埋め込むための初期値ファイル (hex) を生成します。
+8. bin2hex.bat をダブルクリックして実行します。
 
-```
-python trinitaHexGen.py imem.bin
+![image](./images/bin2hex.png)
 
-python trinitaHexGen.py dmem.bin
-
-```
 
 ### 6. Efinity でコンパイルする
 
-1. Efinity で File - Edit Project を選択します。
-2. 下記のとおりコンパイルマクロを追加します。 
+Efinity でコンパイルを実行します。
 
-3. Efinity でコンパイルを実行します。
+![image](./images/compile.png)
 
 ----
 
