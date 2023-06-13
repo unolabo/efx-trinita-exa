@@ -93,7 +93,7 @@ Efinix Sapphire SoC の動作周波数は 20 ~ 400MHz ですが、Trinita Core �
 
 ※ 置き換え手順は YouTube でも公開しています。あわせて参照下さい。
 
-[![手順説明動画](http://img.youtube.com/vi/D_m4lMWA4sU/0.jpg)](https://www.youtube.com/watch?v=D_m4lMWA4sU)
+[![手順説明動画](http://img.youtube.com/vi/4rgMf_d3-N4/0.jpg)](https://www.youtube.com/watch?v=4rgMf_d3-N4)
 
 ### 1. テンプレートをコピーする
 
