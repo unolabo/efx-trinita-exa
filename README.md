@@ -91,6 +91,10 @@ Efinix Sapphire SoC の動作周波数は 20 ~ 400MHz ですが、Trinita Core �
 - 既存デザインに Sapphire SoC が実装済みである
 - Sapphire SoC のインスタンス名が sap である
 
+※ 置き換え手順は YouTube でも公開しています。あわせて参照下さい。
+
+[![手順説明動画](http://img.youtube.com/vi/D_m4lMWA4sU/0.jpg)](https://www.youtube.com/watch?v=D_m4lMWA4sU)
+
 ### 1. テンプレートをコピーする
 
 - template フォルダに格納されているファイル・フォルダを、プロジェクトフォルダにコピーします。
