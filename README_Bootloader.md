@@ -13,6 +13,8 @@
 
 このページではソフトウェアのビルド方法、Bootloader の変更・ビルド方法について説明します。
 
+本ドキュメントの pdf 版は [こちら](./README_Bootloader.pdf) です。
+
 
 ![](./images/boot_1.png)
 
