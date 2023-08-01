@@ -27,6 +27,12 @@
 - FPGA イメージのサイズが 1MB (0x100000) 未満である前提で説明しています。
   - サイズが 1MB を超える場合は、Bootloader のソフトウェアロード設定 / Flash Memory 配置場所の変更が必要です。
 
+## 動画
+
+[![手順説明動画](http://img.youtube.com/vi/0-CccOJGw-A/0.jpg)](https://youtu.be/0-CccOJGw-A)
+
+
+
 ## Example Design の仕様
 
 
