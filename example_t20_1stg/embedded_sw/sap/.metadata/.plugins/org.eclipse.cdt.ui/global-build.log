@@ -1,7 +1,10 @@
-13:42:27 **** Build of configuration Default for project gpioDemo ****
+21:42:54 **** Build of configuration Default for project gpioDemo_Trinita ****
 make all 
 CC src/main.c
-LD gpioDemo
+CC ../common/start.S
+CC ../common/trap.S
+LD gpioDemo_Trinita
 Memory region         Used Size  Region Size  %age Used
-             ROM:        1748 B        32 KB      5.33%
-             RAM:         212 B        32 KB      0.65%
+             rom:        2028 B        32 KB      6.19%
+             ram:        8592 B        32 KB     26.22%
+riscv-none-embed-objdump -s -S build/gpioDemo_Trinita.elf > build/gpioDemo_Trinita.dump

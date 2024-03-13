@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 //  MIT License
 //  
-//  Copyright (c) 2022 SaxonSoc contributors
+//  Copyright (c) 2023 SaxonSoc contributors
 //  
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -121,4 +121,56 @@
         write_u32(config->ssHold, reg + SPI_SS_HOLD);
         write_u32(config->ssDisable, reg + SPI_SS_DISABLE);
     }
+    
+    /**
+    * Wait for SPI Transfer to complete
+    * 
+    * @param reg SPI base address 
+    */
+    static void spi_waitXferBusy(u32 reg){
+    	bsp_uDelay(1);
+    	while(spi_cmdAvailability(reg) != 256);
+    }
 
+#if defined(DEFAULT_ADDRESS_BYTE) || defined(MX25_FLASH)
+    /**
+	* Read Status Register
+	*
+	* @param reg SPI base address
+	* @param cs 32-bit bitwise chip select setting
+	*/
+    static u8 spiReadStatusRegister(u32 reg, u32 cs){
+    	spi_select(reg, cs);
+    	spi_write(reg, 0x05); //Read Status Register
+    	u8 value = spi_read(reg);
+    	spi_diselect(reg, cs);
+    	return value;
+    }
+
+    /**
+	* Write Status Register
+	*
+	* @param reg SPI base address
+	* @param cs 32-bit bitwise chip select setting
+	* @param data 8-bit data
+	*/
+    static void spiWriteStatusRegister(u32 reg, u32 cs, u8 data){
+
+    	spi_select(reg, cs);
+		spi_write(reg, 0x01); //Write Status Register
+		spi_write(reg, data); //Write Status Register
+		spi_diselect(reg, cs);
+    }
+
+    /**
+	* Set Write Enable Latch
+	*
+	* @param reg SPI base address
+	* @param cs 32-bit bitwise chip select setting
+	*/
+    static void spiWriteEnable(u32 reg, u32 cs){
+		spi_select(reg, cs);
+		spi_write(reg, 0x06); // Write Enable Sequence
+		spi_diselect(reg, cs);
+	}
+#endif

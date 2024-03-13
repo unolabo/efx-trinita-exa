@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Copyright (C) 2013-2022 Efinix Inc. All rights reserved.
+// Copyright (C) 2013-2023 Efinix Inc. All rights reserved.
 //
 // This   document  contains  proprietary information  which   is
 // protected by  copyright. All rights  are reserved.  This notice
@@ -46,6 +46,7 @@
 #include "clint.h"
 #include "io.h"
 #include "type.h"
+#include "semihosting.h"
 
 #define BSP_PLIC SYSTEM_PLIC_CTRL
 #define BSP_PLIC_CPU_0 SYSTEM_PLIC_SYSTEM_CORES_0_EXTERNAL_INTERRUPT
@@ -80,9 +81,10 @@
 #define ENABLE_BSP_PRINT                    1 // backward compatible printf //Default: Enable
 #define ENABLE_BSP_PRINTF                   1 // small unified printf       //Default: Enable
 #define ENABLE_BSP_PRINTF_FULL              0 // full unified printf        //Default: Disable
+#define ENABLE_SEMIHOSTING_PRINT            0 // Enable semihosting         //Default: Disable
 
 //Printf Supports Enable
-#define ENABLE_FLOATING_POINT_SUPPORT       SYSTEM_CORES_0_FPU // Enable the supports for floating point printing. Only applicable for BSP_PRINTF and BSP_PRINTF_FULL    // Default: Disable
+#define ENABLE_FLOATING_POINT_SUPPORT       SYSTEM_CORES_0_FPU  // Enable the supports for floating point printing. Only applicable for BSP_PRINTF and BSP_PRINTF_FULL    // Default: Disable
 #define ENABLE_FP_EXPONENTIAL_SUPPORT       0 // Supports Floating point print with exponential. Only applicable for BSP_PRINTF_FULL                    // Default: Disable
 #define ENABLE_PTRDIFF_SUPPORT              0 // Supports pointer difference                                                                            // Default: Disable
 #define ENABLE_LONG_LONG_SUPPORT            0 // Supports long long data type                                                                           // Default: Disable
@@ -91,6 +93,26 @@
 #define ENABLE_BRIDGE_FULL_TO_LITE          1 // If this is enabled, bsp_printf_full can be called with bsp_printf. Enabling both ENABLE_BSP_PRINTF and ENABLE_BSP_PRINTF_FULL, bsp_printf_full will be remained as bsp_printf_full. Default: Enable
 #define ENABLE_PRINTF_WARNING               1 // Print warning when the specifier not supported. Default: Enable
 
+
+    static void _putchar(char character){
+        #if (ENABLE_SEMIHOSTING_PRINT == 1)
+            sh_writec(character);
+        #else
+            bsp_putChar(character);
+        #endif // (ENABLE_SEMIHOSTING_PRINT == 1)
+    }
+
+    static void _putchar_s(char *p)
+    {
+    #if (ENABLE_SEMIHOSTING_PRINT == 1)
+        sh_write0(p);
+    #else
+        while (*p)
+            _putchar(*(p++));
+    #endif // (ENABLE_SEMIHOSTING_PRINT == 1)
+    }
+
+
     //bsp_printHex is used in BSP_PRINTF
     static void bsp_printHex(uint32_t val)
     {
@@ -98,7 +120,7 @@
         digits =8;
 
         for (int i = (4*digits)-4; i >= 0; i -= 4) {
-            uart_write(BSP_UART_TERMINAL, "0123456789ABCDEF"[(val >> i) % 16]);
+            _putchar("0123456789ABCDEF"[(val >> i) % 16]);
         }
     }
 
@@ -108,20 +130,21 @@
             digits =8;
 
             for (int i = (4*digits)-4; i >= 0; i -= 4) {
-                uart_write(BSP_UART_TERMINAL, "0123456789abcdef"[(val >> i) % 16]);
+                _putchar("0123456789abcdef"[(val >> i) % 16]);
+
             }
         }
 
 
 #if (ENABLE_BSP_PRINT)
     static void bsp_print(uint8_t * data) {
-        uart_writeStr(BSP_UART_TERMINAL, (const char*)data);
-        uart_write(BSP_UART_TERMINAL, '\n');
-        uart_write(BSP_UART_TERMINAL, '\r');
+        _putchar_s((char*)data);
+        _putchar('\n');
+        _putchar('\r');
     }
 
     static void bsp_printHexDigit(uint8_t digit){
-        uart_write(BSP_UART_TERMINAL, digit < 10 ? '0' + digit : 'A' + digit - 10);
+        _putchar(digit < 10 ? '0' + digit : 'A' + digit - 10);
     }
 
     static void bsp_printHexByte(uint8_t byte){
@@ -131,7 +154,7 @@
 
     static void bsp_printReg(char* s, u32 data)
     {
-        bsp_putString(s);
+        _putchar_s(s);
         bsp_printHex(data);
     }
 

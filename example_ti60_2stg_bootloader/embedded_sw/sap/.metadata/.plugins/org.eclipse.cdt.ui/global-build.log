@@ -1,9 +1,0 @@
-12:40:17 **** Build of configuration Default for project gpioDemo ****
-make all 
-CC src/main.c
-CC src/start.S
-CC ../common/trap.S
-LD gpioDemo
-Memory region         Used Size  Region Size  %age Used
-             ROM:        1748 B        30 KB      5.69%
-             RAM:         212 B        30 KB      0.69%

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<efxpt:design_db name="example_t20" device_def="T20F256" location="D:\_uno\GitHub\example_t20_bootloader_1stg_src" version="2022.2.322.3.16" db_version="20222999" last_change_date="Mon Mar 27 18:17:49 2023" xmlns:efxpt="http://www.efinixinc.com/peri_design_db" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efinixinc.com/peri_design_db peri_design_db.xsd ">
+<efxpt:design_db name="example_t20" device_def="T20F256" location="D:\_uno\2403-GitHub\test-repo\example_t20_1stg" version="2023.2.307.1.14" db_version="20232999" last_change_date="Fri Mar  8 21:27:00 2024" xmlns:efxpt="http://www.efinixinc.com/peri_design_db" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efinixinc.com/peri_design_db peri_design_db.xsd ">
     <efxpt:device_info>
         <efxpt:iobank_info>
             <efxpt:iobank name="1A" iostd="3.3 V LVTTL / LVCMOS"/>
@@ -18,9 +18,6 @@
         </efxpt:ctrl_info>
     </efxpt:device_info>
     <efxpt:gpio_info device_def="T20F256">
-        <efxpt:gpio name="i_sw" gpio_def="GPIOL_02" mode="input" bus_name="" is_lvds_gpio="false" io_standard="3.3 V LVTTL / LVCMOS">
-            <efxpt:input_config name="i_sw" name_ddio_lo="" conn_type="normal" is_register="false" clock_name="" is_clock_inverted="false" pull_option="none" is_schmitt_trigger="false" ddio_type="none"/>
-        </efxpt:gpio>
         <efxpt:gpio name="io_asyncResetn" gpio_def="GPIOL_05" mode="input" bus_name="" is_lvds_gpio="false" io_standard="3.3 V LVTTL / LVCMOS">
             <efxpt:input_config name="io_asyncResetn" name_ddio_lo="" conn_type="normal" is_register="false" clock_name="" is_clock_inverted="false" pull_option="weak pullup" is_schmitt_trigger="false" ddio_type="none"/>
         </efxpt:gpio>
@@ -64,8 +61,8 @@
         <efxpt:gpio name="system_spi_0_io_sclk_write" gpio_def="GPIOL_01" mode="output" bus_name="" is_lvds_gpio="false" io_standard="3.3 V LVTTL / LVCMOS">
             <efxpt:output_config name="system_spi_0_io_sclk_write" name_ddio_lo="" register_option="register" clock_name="io_systemClk" is_clock_inverted="false" is_slew_rate="false" tied_option="none" ddio_type="none" drive_strength="1"/>
         </efxpt:gpio>
-        <efxpt:gpio name="system_spi_0_io_ss_out" gpio_def="GPIOL_00" mode="output" bus_name="" is_lvds_gpio="false" io_standard="3.3 V LVTTL / LVCMOS">
-            <efxpt:output_config name="system_spi_0_io_ss_out" name_ddio_lo="" register_option="register" clock_name="io_systemClk" is_clock_inverted="false" is_slew_rate="false" tied_option="none" ddio_type="none" drive_strength="1"/>
+        <efxpt:gpio name="system_spi_0_io_ss" gpio_def="GPIOL_00" mode="output" bus_name="" is_lvds_gpio="false" io_standard="3.3 V LVTTL / LVCMOS">
+            <efxpt:output_config name="system_spi_0_io_ss" name_ddio_lo="" register_option="register" clock_name="io_systemClk" is_clock_inverted="false" is_slew_rate="false" tied_option="none" ddio_type="none" drive_strength="1"/>
         </efxpt:gpio>
         <efxpt:gpio name="system_uart_0_io_rxd" gpio_def="GPIOL_44" mode="input" bus_name="" is_lvds_gpio="false" io_standard="3.3 V LVTTL / LVCMOS">
             <efxpt:input_config name="system_uart_0_io_rxd" name_ddio_lo="" conn_type="normal" is_register="false" clock_name="" is_clock_inverted="false" pull_option="weak pullup" is_schmitt_trigger="false" ddio_type="none"/>
@@ -77,9 +74,9 @@
         <efxpt:bus name="o_led" mode="output" msb="7" lsb="0"/>
     </efxpt:gpio_info>
     <efxpt:pll_info>
-        <efxpt:pll name="my_pll" pll_def="PLL_BR0" ref_clock_name="" ref_clock_freq="50.0000" multiplier="16" pre_divider="1" post_divider="8" reset_name="io_pllResetn" locked_name="io_pllLocked" is_ipfrz="false" is_bypass_lock="true">
-            <efxpt:output_clock name="io_systemClk2" number="0" out_divider="4" adv_out_phase_shift="0"/>
-            <efxpt:output_clock name="io_systemClk" number="1" out_divider="4" adv_out_phase_shift="135"/>
+        <efxpt:pll name="my_pll" pll_def="PLL_BR0" ref_clock_name="" ref_clock_freq="50.0000" multiplier="24" pre_divider="1" post_divider="8" reset_name="io_pllResetn" locked_name="io_pllLocked" is_ipfrz="false" is_bypass_lock="true">
+            <efxpt:output_clock name="io_systemClk" number="0" out_divider="6" adv_out_phase_shift="0"/>
+            <efxpt:output_clock name="io_systemClk3" number="1" out_divider="6" adv_out_phase_shift="90"/>
             <efxpt:adv_prop ref_clock_mode="external" ref_clock1_name="" ext_ref_clock_id="3" clksel_name="" feedback_clock_name="" feedback_mode="internal"/>
         </efxpt:pll>
     </efxpt:pll_info>

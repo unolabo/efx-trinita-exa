@@ -15,5 +15,5 @@
 `define FILE_DMEM2 "./romdata/dmem2.hex"
 `define FILE_DMEM3 "./romdata/dmem3.hex"
 `define TRION 1
-//`define STAGE2 1
+
 

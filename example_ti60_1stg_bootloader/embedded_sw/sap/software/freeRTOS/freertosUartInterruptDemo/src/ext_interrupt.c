@@ -23,7 +23,7 @@ void uart_interrupt_init(void){
     plic_set_priority(BSP_PLIC, SYSTEM_PLIC_SYSTEM_UART_0_IO_INTERRUPT, 1);
 
     csr_set(mie, MIE_MEIE); //Enable external interrupts
-    csr_write(mstatus, MSTATUS_MPP | MSTATUS_MIE);
+    csr_write(mstatus, csr_read(mstatus) | MSTATUS_MPP | MSTATUS_MIE);
 }
 
 
@@ -64,7 +64,7 @@ void UartInterrupt(){
 }
 
 
-void external_interrupt_handler(void){
+void freertos_risc_v_application_interrupt_handler(void){
 
     int32_t mcause = csr_read(mcause);
     int32_t interrupt = mcause < 0;    //Interrupt if set, exception if cleared

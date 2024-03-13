@@ -3,6 +3,7 @@ module top
     input  io_asyncResetn,
     input  io_systemClk,
     input  io_systemClk2,
+    input  io_systemClk3,
     output io_pllResetn,
     input  io_pllLocked,
     
@@ -19,7 +20,7 @@ module top
     output system_spi_0_io_data_3_write,
     output system_spi_0_io_data_3_writeEnable,
     output system_spi_0_io_sclk_write,
-    output system_spi_0_io_ss_out,
+    output system_spi_0_io_ss,
     
     output system_uart_0_io_txd,
     input  system_uart_0_io_rxd,
@@ -60,7 +61,7 @@ module top
     wire system_i2c_0_io_sda_read;
     wire system_i2c_0_io_sda_write;
     
-    wire [0:0] system_spi_0_io_ss;
+    wire [0:0] system_spi_1_io_ss;
     wire [15:0] io_apbSlave_0_PADDR;
     wire io_apbSlave_0_PENABLE;
     wire [31:0] io_apbSlave_0_PRDATA;
@@ -76,7 +77,7 @@ module top
     wire [15:0] system_gpio_0_io_write;
     wire [15:0] system_gpio_0_io_read;
     
-    assign system_spi_0_io_ss_out = system_spi_0_io_ss[0];
+    
     assign io_pllResetn = io_asyncResetn;
     assign io_socReset  = ~io_pllLocked;
     assign o_led = system_gpio_0_io_write[7:0];
@@ -84,6 +85,7 @@ module top
     sap u_sap(
     .io_systemClk ( io_systemClk ),
     .io_systemClk2 ( io_systemClk2 ),
+    .io_systemClk3 ( io_systemClk3 ),
     .jtagCtrl_enable ( jtagCtrl_enable ),
     .jtagCtrl_tdi ( jtagCtrl_tdi ),
     .jtagCtrl_capture ( jtagCtrl_capture ),

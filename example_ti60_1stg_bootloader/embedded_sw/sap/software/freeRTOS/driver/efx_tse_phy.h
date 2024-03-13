@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Copyright (C) 2013-2022 Efinix Inc. All rights reserved.              
+// Copyright (C) 2013-2023 Efinix Inc. All rights reserved.              
 //
 // This   document  contains  proprietary information  which   is        
 // protected by  copyright. All rights  are reserved.  This notice       
@@ -139,7 +139,7 @@ static u32 PhyNormalInit()
 /************************** Function File ***************************/
 static void PhyLoopInit(u32 speed)
 {
-	PhyDlySetRXTX(8, 1);
+	PhyDlySetRXTX(15, 15);
 	u32 Value;
 	if(speed == 0x4) {
 		Phy_Wr(0x0, 0x4140);

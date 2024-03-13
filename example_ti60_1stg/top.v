@@ -3,6 +3,7 @@ module top
     input  io_asyncResetn,
     input  io_systemClk,
     input  io_systemClk2,
+    input  io_systemClk3,
     output io_pllResetn,
     input  io_pllLocked,
     
@@ -84,6 +85,7 @@ module top
     sap u_sap(
     .io_systemClk ( io_systemClk ),
     .io_systemClk2 ( io_systemClk2 ),
+    .io_systemClk3 ( io_systemClk3 ),
     .jtagCtrl_enable ( jtagCtrl_enable ),
     .jtagCtrl_tdi ( jtagCtrl_tdi ),
     .jtagCtrl_capture ( jtagCtrl_capture ),

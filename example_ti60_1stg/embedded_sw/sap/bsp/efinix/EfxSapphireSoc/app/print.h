@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Copyright (C) 2013-2022 Efinix Inc. All rights reserved.
+// Copyright (C) 2013-2023 Efinix Inc. All rights reserved.
 //
 // This   document  contains  proprietary information  which   is
 // protected by  copyright. All rights  are reserved.  This notice
@@ -47,6 +47,8 @@
 #include "bsp.h"
 
 #if (ENABLE_BSP_PRINTF)
+
+
     #if (ENABLE_FLOATING_POINT_SUPPORT)
     /* reverse:  reverse string s in place */
      static void reverse(char s[])
@@ -122,9 +124,9 @@
     {
         char sval[10];
         itos(val, sval);
-        uart_writeStr(BSP_UART_TERMINAL, sval);
+        _putchar_s(sval);
+
     }
-    
     static void print_float(double val)
     {
         int i, j, neg;
@@ -141,7 +143,7 @@
                 fval[i-1] = fval[i];
                 i++;
             }
-    
+
         }
         strcat(sval, fval);
         if ((sval[0] != '-') && (neg == 1))
@@ -153,22 +155,25 @@
             }
             sval[0] = '-';
         }
-        uart_writeStr(BSP_UART_TERMINAL, sval);
+        _putchar_s(sval);
     }
 
     #endif //#if (ENABLE_FLOATING_POINT_SUPPORT)
 
+    
+
     static void bsp_printf_c(int c)
     {
-        bsp_putChar(c);
+        _putchar(c);
     }
-    
+
     static void bsp_printf_s(char *p)
     {
-        while (*p)
-            bsp_putChar(*(p++));
+        _putchar_s(p);
     }
-    
+
+
+
     static void bsp_printf_d(int val)
     {
         char buffer[32];
@@ -184,11 +189,11 @@
         while (p != buffer)
             bsp_printf_c(*(--p));
     }
-    
+
     static void bsp_printf_x(int val)
     {
         int i,digi=2;
-    
+
         for(i=0;i<8;i++)
         {
             if((val & (0xFFFFFFF0 <<(4*i))) == 0)
@@ -199,7 +204,7 @@
         }
         bsp_printHex_lower(val);
     }
-    
+
     static void bsp_printf_X(int val)
         {
             int i,digi=2;
@@ -214,14 +219,14 @@
             }
             bsp_printHex(val);
         }
-
+#if (ENABLE_SEMIHOSTING_PRINT == 0)
     static void bsp_printf(const char *format, ...)
     {
         int i;
         va_list ap;
-    
+
         va_start(ap, format);
-    
+
         for (i = 0; format[i]; i++)
             if (format[i] == '%') {
                 while (format[++i]) {
@@ -259,9 +264,25 @@
                 }
             } else
                 bsp_printf_c(format[i]);
-    
+
         va_end(ap);
     }
 
-#endif //#if (ENABLE_BSP_PRINTF)
+#else // #if (ENABLE_SEMIHOSTING_PRINT == 1)
+    #include "print_full.h"
+    static int bsp_printf(const char* format, ...)
+    {
+      va_list va;
+      va_start(va, format);
 
+      char buffer[MAX_STRING_BUFFER_SIZE];
+        const int ret = _vsnprintf(_out_buffer, buffer, (size_t)-1, format, va);
+        _putchar_s(buffer);
+
+      va_end(va);
+      return ret;
+    }
+
+
+#endif // #if (ENABLE_SEMIHOSTING_PRINT == 0)
+#endif //#if (ENABLE_BSP_PRINTF)

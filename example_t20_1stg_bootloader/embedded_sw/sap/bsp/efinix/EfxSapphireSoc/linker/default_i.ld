@@ -109,15 +109,13 @@ SECTIONS
     KEEP (*(.dtors))
   } >ram AT>ram :ram
 
-  .lalign         :
+  .lalign         : ALIGN(4)
   {
-    . = ALIGN(4);
     PROVIDE( _data_lma = . );
   } >ram AT>ram :ram
 
-  .dalign         :
+  .dalign         : ALIGN(4)
   {
-    . = ALIGN(4);
     PROVIDE( _data = . );
   } >ram AT>ram :ram
 

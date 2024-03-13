@@ -1,7 +1,7 @@
 //*------------------------------------------------------------------------------------------
 //  MIT License
 //  
-//  Copyright (c) 2022 SaxonSoc contributors
+//  Copyright (c) 2023 SaxonSoc contributors
 //  
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@
 #include "plic.h"
 
 
-    void external_interrupt_handler(void){
+    void freertos_risc_v_application_interrupt_handler(void){
         uint32_t claim;
         while(claim = plic_claim(BSP_PLIC, BSP_PLIC_CPU_0)){
             switch(claim){

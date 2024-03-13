@@ -1,5 +1,5 @@
-create_clock -period 40.0000 io_systemClk2
-create_clock -waveform {15.0000 35.0000} -period 40.0000 io_systemClk
+create_clock -period 40.0000 io_systemClk
+create_clock -waveform {10.0000 30.0000} -period 40.0000 io_systemClk3
 
 # GPIO Constraints
 ####################

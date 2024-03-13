@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Copyright (C) 2013-2022 Efinix Inc. All rights reserved.              
+// Copyright (C) 2013-2023 Efinix Inc. All rights reserved.              
 //
 // This   document  contains  proprietary information  which   is        
 // protected by  copyright. All rights  are reserved.  This notice       
@@ -73,7 +73,7 @@ void init(){
     csr_write(mtvec, trap_entry); 
     //Enable external interrupts
     csr_set(mie, MIE_MEIE); 
-    csr_write(mstatus, MSTATUS_MPP | MSTATUS_MIE);
+    csr_write(mstatus, csr_read(mstatus) | MSTATUS_MPP | MSTATUS_MIE);
 }
 
 //Called by trap_entry on both exceptions and interrupts events
@@ -117,17 +117,15 @@ void main() {
     //configure 4 bits gpio 0
     gpio_setOutputEnable(GPIO0, 0xe);
     gpio_setOutput(GPIO0, 0x0);
-    for (int i=0; i<1000000; i=i+1) {
+    for (int i=0; i<50; i=i+1) {
         gpio_setOutput(GPIO0, gpio_getOutput(GPIO0) ^ 0xe);
         bsp_uDelay(LOOP_UDELAY);
-    }
-    /*
+    }   
     bsp_printf("gpio 0 interrupt demo ! \r\n");
     bsp_printf("Ti180 press and release onboard button sw4 \r\n");
     bsp_printf("Ti60 press and release onboard button sw6 \r\n");
     bsp_printf("T120 press and release onboard button sw7 \r\n");
     init();
-    */
     while(1); 
 }
 #else

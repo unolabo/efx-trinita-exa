@@ -3,7 +3,7 @@
     "contentVersion": "0.2.0",
     "headerVersion": "0.2.0",
     "license": "MIT",
-    "copyright": "Copyright (C) 2013-2022 Efinix Inc. All rights reserved.",
+    "copyright": "Copyright (C) 2013-2023 Efinix Inc. All rights reserved.",
     "device": {
         "sapphire SoC": {
             "version": "1.0.0",
@@ -1738,8 +1738,13 @@
                                     "bitOffset": "7",
                                     "bitWidth": "1"
                                 },
-                                "clockGenBusyEnable": {
-                                    "description": "Master clock generation interrupt enable",
+                                "clockGenExitEnable": {
+                                    "description": "Master clock generation exit interrupt enable",
+                                    "bitOffset": "15",
+                                    "bitWidth": "1"
+                                },
+                                "clockGenEnterEnable": {
+                                    "description": "Master clock generation enter interrupt enable",
                                     "bitOffset": "16",
                                     "bitWidth": "1"
                                 },
@@ -1774,15 +1779,19 @@
                                     "bitOffset": "7",
                                     "bitWidth": "1"
                                 },
-                                "clockGenBusyFlag": {
-                                    "description": "Master clock generation interrupt flag",
+                                "clockGenExitFlag": {
+                                    "description": "Master clock generation exit interrupt flag",
+                                    "bitOffset": "15",
+                                    "bitWidth": "1"
+                                },
+                                "clockGenEnterFlag": {
+                                    "description": "Master clock generation enter interrupt flag",
                                     "bitOffset": "16",
-                                    "bitWidth": "1",
-                                    "access": "w"
+                                    "bitWidth": "1"
                                 },
                                 "filterFlag": {
                                     "description": "Slave address filtering hit interrupt",
-                                    "bitOffset": "16",
+                                    "bitOffset": "17",
                                     "bitWidth": "1",
                                     "access": "w"
                                 }
@@ -1847,6 +1856,66 @@
                                 "drop": {
                                     "description": "Master drop",
                                     "bitOffset": "6",
+                                    "bitWidth": "1"
+                                },
+                                "recover": {
+                                    "description": "Order a recover sequence",
+                                    "bitOffset": "7",
+                                    "bitWidth": "1"
+                                },
+                                "startDropped": {
+                                    "description": "Indicates timeout occurred during start sequence. Clear on set",
+                                    "bitOffset": "9",
+                                    "bitWidth": "1"
+                                },
+                                "stopDropped": {
+                                    "description": "Indicates timeout occurred during stop sequence. Clear on set",
+                                    "bitOffset": "10",
+                                    "bitWidth": "1"
+                                },
+                                "recoverDropped": {
+                                    "description": "Indicates timeout occurred during recover sequence. Clear on set",
+                                    "bitOffset": "11",
+                                    "bitWidth": "1"
+                                }
+                            }
+                        },
+                        "slaveStatus": {
+                            "description": "Slave Status Register",
+                            "addressOffset": "0x0044",
+                            "fields": {
+                                "inFrame": {
+                                    "description": "Indicates the transaction is already started.",
+                                    "bitOffset": "0",
+                                    "bitWidth": "1",
+                                    "access": "r"
+                                },
+                                "sda": {
+                                    "description": "Read the current state of SDA line. 1: High state; 0: Low state",
+                                    "bitOffset": "1",
+                                    "bitWidth": "1",
+                                    "access": "r"
+                                },
+                                "scl": {
+                                    "description": "Read the current state of SCL line. 1: High state; 0: Low state",
+                                    "bitOffset": "2",
+                                    "bitWidth": "1",
+                                    "access": "r"
+                                }
+                            }
+                        },
+                        "slaveOverride": {
+                            "description": "Slave Override Register",
+                            "addressOffset": "0x0048",
+                            "fields": {
+                                "sda": {
+                                    "description": "Force SDA line pull low when cleared",
+                                    "bitOffset": "1",
+                                    "bitWidth": "1"
+                                },
+                                "scl": {
+                                    "description": "Force SCL line pull low when cleared",
+                                    "bitOffset": "2",
                                     "bitWidth": "1"
                                 }
                             }
@@ -2136,8 +2205,13 @@
                                     "bitOffset": "7",
                                     "bitWidth": "1"
                                 },
-                                "clockGenBusyEnable": {
-                                    "description": "Master clock generation interrupt enable",
+                                "clockGenExitEnable": {
+                                    "description": "Master clock generation exit interrupt enable",
+                                    "bitOffset": "15",
+                                    "bitWidth": "1"
+                                },
+                                "clockGenEnterEnable": {
+                                    "description": "Master clock generation enter interrupt enable",
                                     "bitOffset": "16",
                                     "bitWidth": "1"
                                 },
@@ -2172,15 +2246,19 @@
                                     "bitOffset": "7",
                                     "bitWidth": "1"
                                 },
-                                "clockGenBusyFlag": {
-                                    "description": "Master clock generation interrupt flag",
+                                "clockGenExitFlag": {
+                                    "description": "Master clock generation exit interrupt flag",
+                                    "bitOffset": "15",
+                                    "bitWidth": "1"
+                                },
+                                "clockGenEnterFlag": {
+                                    "description": "Master clock generation enter interrupt flag",
                                     "bitOffset": "16",
-                                    "bitWidth": "1",
-                                    "access": "w"
+                                    "bitWidth": "1"
                                 },
                                 "filterFlag": {
                                     "description": "Slave address filtering hit interrupt",
-                                    "bitOffset": "16",
+                                    "bitOffset": "17",
                                     "bitWidth": "1",
                                     "access": "w"
                                 }
@@ -2245,6 +2323,66 @@
                                 "drop": {
                                     "description": "Master drop",
                                     "bitOffset": "6",
+                                    "bitWidth": "1"
+                                },
+                                "recover": {
+                                    "description": "Order a recover sequence",
+                                    "bitOffset": "7",
+                                    "bitWidth": "1"
+                                },
+                                "startDropped": {
+                                    "description": "Indicates timeout occurred during start sequence. Clear on set",
+                                    "bitOffset": "9",
+                                    "bitWidth": "1"
+                                },
+                                "stopDropped": {
+                                    "description": "Indicates timeout occurred during stop sequence. Clear on set",
+                                    "bitOffset": "10",
+                                    "bitWidth": "1"
+                                },
+                                "recoverDropped": {
+                                    "description": "Indicates timeout occurred during recover sequence. Clear on set",
+                                    "bitOffset": "11",
+                                    "bitWidth": "1"
+                                }
+                            }
+                        },
+                        "slaveStatus": {
+                            "description": "Slave Status Register",
+                            "addressOffset": "0x0044",
+                            "fields": {
+                                "inFrame": {
+                                    "description": "Indicates the transaction is already started.",
+                                    "bitOffset": "0",
+                                    "bitWidth": "1",
+                                    "access": "r"
+                                },
+                                "sda": {
+                                    "description": "Read the current state of SDA line. 1: High state; 0: Low state",
+                                    "bitOffset": "1",
+                                    "bitWidth": "1",
+                                    "access": "r"
+                                },
+                                "scl": {
+                                    "description": "Read the current state of SCL line. 1: High state; 0: Low state",
+                                    "bitOffset": "2",
+                                    "bitWidth": "1",
+                                    "access": "r"
+                                }
+                            }
+                        },
+                        "slaveOverride": {
+                            "description": "Slave Override Register",
+                            "addressOffset": "0x0048",
+                            "fields": {
+                                "sda": {
+                                    "description": "Force SDA line pull low when cleared",
+                                    "bitOffset": "1",
+                                    "bitWidth": "1"
+                                },
+                                "scl": {
+                                    "description": "Force SCL line pull low when cleared",
+                                    "bitOffset": "2",
                                     "bitWidth": "1"
                                 }
                             }

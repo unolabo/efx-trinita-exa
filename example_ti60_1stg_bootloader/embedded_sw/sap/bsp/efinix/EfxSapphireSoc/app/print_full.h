@@ -44,7 +44,7 @@
 #include "bsp.h"
 #include "soc.h"
 
-#if (ENABLE_BSP_PRINTF_FULL)
+#if (ENABLE_BSP_PRINTF_FULL || ENABLE_SEMIHOSTING_PRINT == 1)
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -170,6 +170,11 @@ extern "C" {
 #define PRINTF_SUPPORT_PTRDIFF_T
 #endif
 
+// Define the max string buffer size can be allocate when using the semihosting printing
+#ifndef MAX_STRING_BUFFER_SIZE
+#define MAX_STRING_BUFFER_SIZE 100
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////
 
 // internal flag definitions
@@ -191,15 +196,6 @@ extern "C" {
 #if defined(PRINTF_SUPPORT_FLOAT)
 #include <float.h>
 #endif
-
-
-/**
- * Output a character to a custom device like UART, used by the printf() function
- */
-static void _putchar(char character){
-    bsp_putChar(character);
-}
-
 
 // output function type
 typedef void (*out_fct_type)(char character, void* buffer, size_t idx, size_t maxlen);
@@ -993,8 +989,16 @@ static int printf_(const char* format, ...)
 {
   va_list va;
   va_start(va, format);
-  char buffer[1];
-  const int ret = _vsnprintf(_out_char, buffer, (size_t)-1, format, va);
+#if (ENABLE_SEMIHOSTING_PRINT == 1) // if semihosting is enabled. This is to speed up the printing process by printing string instead of char
+    char buffer[MAX_STRING_BUFFER_SIZE];
+    const int ret = _vsnprintf(_out_buffer, buffer, (size_t)-1, format, va);
+    _putchar_s(buffer);
+#else
+    char buffer[1];
+    const int ret = _vsnprintf(_out_char, buffer, (size_t)-1, format, va);
+
+#endif
+
   va_end(va);
   return ret;
 }

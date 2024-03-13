@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Copyright (C) 2013-2022 Efinix Inc. All rights reserved.              
+// Copyright (C) 2013-2023 Efinix Inc. All rights reserved.              
 //
 // This   document  contains  proprietary information  which   is        
 // protected by  copyright. All rights  are reserved.  This notice       
@@ -60,7 +60,6 @@ sap u_sap(
 .system_spi_0_io_data_3_write ( system_spi_0_io_data_3_write ),
 .system_spi_0_io_data_3_writeEnable ( system_spi_0_io_data_3_writeEnable ),
 .system_spi_0_io_sclk_write ( system_spi_0_io_sclk_write ),
-.system_spi_0_io_ss ( system_spi_0_io_ss ),
 .system_spi_1_io_data_0_read ( system_spi_1_io_data_0_read ),
 .system_spi_1_io_data_0_write ( system_spi_1_io_data_0_write ),
 .system_spi_1_io_data_0_writeEnable ( system_spi_1_io_data_0_writeEnable ),
@@ -97,5 +96,6 @@ sap u_sap(
 .system_i2c_0_io_sda_write ( system_i2c_0_io_sda_write ),
 .system_gpio_0_io_writeEnable ( system_gpio_0_io_writeEnable ),
 .system_gpio_0_io_write ( system_gpio_0_io_write ),
-.system_gpio_0_io_read ( system_gpio_0_io_read )
+.system_gpio_0_io_read ( system_gpio_0_io_read ),
+.system_spi_0_io_ss ( system_spi_0_io_ss )
 );

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 //  MIT License
 //  
-//  Copyright (c) 2022 SaxonSoc contributors
+//  Copyright (c) 2023 SaxonSoc contributors
 //  
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -216,7 +216,6 @@ asm(".set regnum_t5  , 30");
 asm(".set regnum_t6  , 31");
 
 asm(".set CUSTOM0  , 0x0B");
-asm(".set CUSTOM1  , 0x2B");
 
 #define opcode_R(opcode, func3, func7, rs1, rs2)   \
 ({                                             \

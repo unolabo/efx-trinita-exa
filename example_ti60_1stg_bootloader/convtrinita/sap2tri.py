@@ -16,6 +16,7 @@ def ConvSap2Tri(sap_source):
     .debug_resetOut                   (system_cores_0_logic_cpu_debug_resetOut                    ), //o
     .io_systemClk                     (io_systemClk                                               ), //i
     .io_systemClk2                    (io_systemClk2                                              ), //i
+    .io_systemClk3                    (io_systemClk3                                              ), //i
 
     // Data Bus
     .dBus_cmd_valid                   (system_cores_0_logic_cpu_dBus_cmd_valid                    ), //o
@@ -74,15 +75,15 @@ def ConvSap2Tri(sap_source):
             newline = line.replace("`define IP_UUID ", "`define TRINITA\n`define IP_UUID ")
             state = 1
         elif (state==1 and "input io_systemClk," in line):
-            newline = line.replace("input io_systemClk,", "input io_systemClk,\ninput io_systemClk2,")
+            newline = line.replace("input io_systemClk,", "input io_systemClk,\ninput io_systemClk2,\ninput io_systemClk3,")
             state = 2
         elif (state==2 and ".io_systemClk ( io_systemClk )," in line) :
-            newline = line.replace(".io_systemClk ( io_systemClk ),", ".io_systemClk ( io_systemClk ),\n.io_systemClk2 ( io_systemClk2 ),")
+            newline = line.replace(".io_systemClk ( io_systemClk ),", ".io_systemClk ( io_systemClk ),\n.io_systemClk2 ( io_systemClk2 ),\n.io_systemClk3 ( io_systemClk3 ),")
             state = 3
         elif (state==3 and "module EfxSapphireSoc_" in line):
             state = 4
         elif (state==4 and "io_systemClk" in line):
-            newline = line.replace("io_systemClk,", "io_systemClk,\n  input               io_systemClk2,")
+            newline = line.replace("io_systemClk,", "io_systemClk,\n  input               io_systemClk2,\n  input               io_systemClk3,")
             state = 5
         elif (state==5 and "VexRiscv_" in line):
             newline = "`ifndef TRINITA\n" + line

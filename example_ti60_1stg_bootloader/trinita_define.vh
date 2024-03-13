@@ -14,3 +14,4 @@
 `define FILE_DMEM1 "./romdata/dmem1.hex"
 `define FILE_DMEM2 "./romdata/dmem2.hex"
 `define FILE_DMEM3 "./romdata/dmem3.hex"
+`define TITANIUM 1

@@ -1,4 +1,4 @@
-!SESSION 2023-02-23 12:00:56.963 -----------------------------------------------
+!SESSION 2024-03-08 21:40:37.296 -----------------------------------------------
 eclipse.buildId=unknown
 java.version=18.0.1
 java.vendor=Eclipse Adoptium
@@ -6,128 +6,8 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ja_JP
 Framework arguments:  -clearPersistedState
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -clearPersistedState
 
-!ENTRY org.eclipse.ui 4 4 2023-02-23 12:01:10.596
+!ENTRY org.eclipse.ui 4 4 2024-03-08 21:40:48.475
 !MESSAGE MenuAdditionCacheEntry.mergeIntoModel: Invalid menu URI: com.ashling.riscfree.efinix.newproject.wizard.CreateNewEfinixProject
 
-!ENTRY org.eclipse.cdt.core 1 0 2023-02-23 12:01:38.226
-!MESSAGE Indexed 'gpioDemo' (1 sources, 44 headers) in 0.548 sec: 1,470 declarations; 2,113 references; 0 unresolved inclusions; 5 syntax errors; 0 unresolved names (0%)
-
-!ENTRY org.eclipse.embedcdt.debug.gdbjtag.core 4 1 2023-02-23 12:01:53.181
-!MESSAGE C:\Efinity\efinity-riscv-ide-2022.2.3\Efinity-RISCV-IDE\/../openocd/bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 -f ../../../bsp/efinix/EfxSapphireSoc/openocd/ftdi.cfg -f ../../../bsp/efinix/EfxSapphireSoc/openocd/debug.cfg -c echo "Started by GNU MCU Eclipse"
-
-!ENTRY org.eclipse.embedcdt.debug.gdbjtag.core 4 0 2023-02-23 12:01:59.519
-!MESSAGE OpenOCD failed with code (1).
-
-For more details, see the openocd.exe console.
-
-!ENTRY org.eclipse.embedcdt.debug.gdbjtag.core 4 1 2023-02-23 12:07:45.982
-!MESSAGE C:\Efinity\efinity-riscv-ide-2022.2.3\Efinity-RISCV-IDE\/../openocd/bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 -f ../../../bsp/efinix/EfxSapphireSoc/openocd/ftdi.cfg -f ../../../bsp/efinix/EfxSapphireSoc/openocd/debug.cfg -c echo "Started by GNU MCU Eclipse"
-
-!ENTRY org.eclipse.embedcdt.debug.gdbjtag.core 4 0 2023-02-23 12:07:51.876
-!MESSAGE OpenOCD failed with code (1).
-
-For more details, see the openocd.exe console.
-!SESSION 2023-02-23 12:09:37.391 -----------------------------------------------
-eclipse.buildId=unknown
-java.version=18.0.1
-java.vendor=Eclipse Adoptium
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ja_JP
-Framework arguments:  -clearPersistedState
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -clearPersistedState
-
-!ENTRY org.eclipse.ui 4 4 2023-02-23 12:09:42.465
-!MESSAGE MenuAdditionCacheEntry.mergeIntoModel: Invalid menu URI: com.ashling.riscfree.efinix.newproject.wizard.CreateNewEfinixProject
-
-!ENTRY org.eclipse.embedcdt.debug.gdbjtag.core 4 1 2023-02-23 12:10:02.061
-!MESSAGE C:\Efinity\efinity-riscv-ide-2022.2.3\Efinity-RISCV-IDE\/../openocd/bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 -f ../../../bsp/efinix/EfxSapphireSoc/openocd/ftdi.cfg -f ../../../bsp/efinix/EfxSapphireSoc/openocd/debug.cfg -c echo "Started by GNU MCU Eclipse"
-
-!ENTRY org.eclipse.embedcdt.debug.gdbjtag.core 4 0 2023-02-23 12:10:07.949
-!MESSAGE OpenOCD failed with code (1).
-
-For more details, see the openocd.exe console.
-
-!ENTRY org.eclipse.embedcdt.debug.gdbjtag.core 4 1 2023-02-23 12:19:12.526
-!MESSAGE C:\Efinity\efinity-riscv-ide-2022.2.3\Efinity-RISCV-IDE\/../openocd/bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 -f ../../../bsp/efinix/EfxSapphireSoc/openocd/ftdi.cfg -f ../../../bsp/efinix/EfxSapphireSoc/openocd/debug.cfg -c echo "Started by GNU MCU Eclipse"
-
-!ENTRY org.eclipse.embedcdt.debug.gdbjtag.core 4 0 2023-02-23 12:19:18.410
-!MESSAGE OpenOCD failed with code (1).
-
-For more details, see the openocd.exe console.
-!SESSION 2023-02-23 12:33:48.822 -----------------------------------------------
-eclipse.buildId=unknown
-java.version=18.0.1
-java.vendor=Eclipse Adoptium
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ja_JP
-Framework arguments:  -clearPersistedState
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -clearPersistedState
-
-!ENTRY org.eclipse.ui 4 4 2023-02-23 12:33:52.380
-!MESSAGE MenuAdditionCacheEntry.mergeIntoModel: Invalid menu URI: com.ashling.riscfree.efinix.newproject.wizard.CreateNewEfinixProject
-
-!ENTRY org.eclipse.embedcdt.debug.gdbjtag.core 4 1 2023-02-23 12:39:33.499
-!MESSAGE C:\Efinity\efinity-riscv-ide-2022.2.3\Efinity-RISCV-IDE\/../openocd/bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 -f ../../../bsp/efinix/EfxSapphireSoc/openocd/ftdi.cfg -f ../../../bsp/efinix/EfxSapphireSoc/openocd/debug.cfg -c echo "Started by GNU MCU Eclipse"
-
-!ENTRY org.eclipse.embedcdt.debug.gdbjtag.core 4 1 2023-02-23 12:39:34.408
-!MESSAGE C:\Efinity\efinity-riscv-ide-2022.2.3\Efinity-RISCV-IDE\/../toolchain/bin/riscv-none-embed-gdb.exe --interpreter=mi2 --nx
-
-!ENTRY org.eclipse.core.jobs 2 2 2023-02-23 12:39:47.394
-!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.cdt.dsf.gdb.internal.ui.console.GdbBasicCliConsole$InputReadJob
-!SESSION 2023-02-28 16:44:08.837 -----------------------------------------------
-eclipse.buildId=unknown
-java.version=18.0.1
-java.vendor=Eclipse Adoptium
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ja_JP
-Framework arguments:  -clearPersistedState
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -clearPersistedState
-
-!ENTRY org.eclipse.ui 4 4 2023-02-28 16:44:30.845
-!MESSAGE MenuAdditionCacheEntry.mergeIntoModel: Invalid menu URI: com.ashling.riscfree.efinix.newproject.wizard.CreateNewEfinixProject
-
-!ENTRY org.eclipse.core.jobs 2 2 2023-02-28 17:25:57.131
-!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.ui.actions.BuildAction$1
-!SESSION 2023-02-28 17:25:59.869 -----------------------------------------------
-eclipse.buildId=unknown
-java.version=18.0.1
-java.vendor=Eclipse Adoptium
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ja_JP
-Framework arguments:  -clearPersistedState
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -clearPersistedState
-
-!ENTRY org.eclipse.ui 4 4 2023-02-28 17:26:03.211
-!MESSAGE MenuAdditionCacheEntry.mergeIntoModel: Invalid menu URI: com.ashling.riscfree.efinix.newproject.wizard.CreateNewEfinixProject
-!SESSION 2023-03-21 09:57:31.767 -----------------------------------------------
-eclipse.buildId=unknown
-java.version=18.0.1
-java.vendor=Eclipse Adoptium
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ja_JP
-Framework arguments:  -clearPersistedState
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -clearPersistedState
-
-!ENTRY org.eclipse.core.resources 2 10035 2023-03-21 09:57:36.315
-!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
-
-!ENTRY org.eclipse.ui 4 4 2023-03-21 09:57:41.430
-!MESSAGE MenuAdditionCacheEntry.mergeIntoModel: Invalid menu URI: com.ashling.riscfree.efinix.newproject.wizard.CreateNewEfinixProject
-
-!ENTRY org.eclipse.cdt.core 1 0 2023-03-21 09:58:37.440
-!MESSAGE Indexed 'gpioDemo' (1 sources, 0 headers) in 0.138 sec: 1 declarations; 4 references; 6 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
-!SESSION 2023-03-21 13:15:36.574 -----------------------------------------------
-eclipse.buildId=unknown
-java.version=18.0.1
-java.vendor=Eclipse Adoptium
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ja_JP
-Framework arguments:  -clearPersistedState
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -clearPersistedState
-
-!ENTRY org.eclipse.ui 4 4 2023-03-21 13:15:45.817
-!MESSAGE MenuAdditionCacheEntry.mergeIntoModel: Invalid menu URI: com.ashling.riscfree.efinix.newproject.wizard.CreateNewEfinixProject
-!SESSION 2023-03-21 13:40:19.205 -----------------------------------------------
-eclipse.buildId=unknown
-java.version=18.0.1
-java.vendor=Eclipse Adoptium
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ja_JP
-Framework arguments:  -clearPersistedState
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -clearPersistedState
-
-!ENTRY org.eclipse.ui 4 4 2023-03-21 13:40:22.235
-!MESSAGE MenuAdditionCacheEntry.mergeIntoModel: Invalid menu URI: com.ashling.riscfree.efinix.newproject.wizard.CreateNewEfinixProject
+!ENTRY org.eclipse.cdt.core 1 0 2024-03-08 21:41:14.495
+!MESSAGE Indexed 'gpioDemo_Trinita' (1 sources, 46 headers) in 0.629 sec: 1,511 declarations; 2,115 references; 0 unresolved inclusions; 5 syntax errors; 0 unresolved names (0%)

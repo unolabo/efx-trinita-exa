@@ -1,8 +1,9 @@
-10:20:39 **** Build of configuration Default for project bootloader ****
+21:46:38 **** Build of configuration Default for project bootloader_Trinita ****
 make all 
 CC src/main.c
-CC src/start.S
-LD bootloader
+CC ../common/start.S
+LD bootloader_Trinita
 Memory region         Used Size  Region Size  %age Used
-             ROM:        1212 B         2 KB     59.18%
-             RAM:          0 GB         2 KB      0.00%
+             rom:        1452 B         2 KB     70.90%
+             ram:        1040 B         2 KB     50.78%
+riscv-none-embed-objdump -s -S build/bootloader_Trinita.elf > build/bootloader_Trinita.dump

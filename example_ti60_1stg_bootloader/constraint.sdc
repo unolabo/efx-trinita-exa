@@ -1,5 +1,7 @@
+
 create_clock -period 10.0000 clkfb
 create_clock -period 13.3333 io_systemClk
+create_clock -waveform {3.3333 10.0000} -period 13.3333 io_systemClk3
 create_clock -waveform {8.3333 15.0000} -period 13.3333 io_systemClk2
 
 # GPIO Constraints

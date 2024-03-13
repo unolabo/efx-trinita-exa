@@ -35,8 +35,9 @@ $(OBJDIR)/%.elf: $(OBJS) | $(OBJDIR)
 
 %.bin: %.elf
 	@$(RISCV_OBJCOPY) -O binary $^ $@
-	@$(RISCV_OBJCOPY) -O binary --only-section=.rodata* $^ $(OBJDIR)/dmem.bin
-	@$(RISCV_OBJCOPY) -O binary --only-section=.text* $^ $(OBJDIR)/imem.bin
+	@$(RISCV_OBJCOPY) -O binary --only-section=.ram_section* $^ $(OBJDIR)/dmem.bin
+	@$(RISCV_OBJCOPY) -O binary --only-section=.rom_section* $^ $(OBJDIR)/imem.bin
+	$(RISCV_OBJDUMP) -s -S $^ > $(OBJDIR)/$(PROJ_NAME).dump
 
 %.v: %.elf
 	@$(RISCV_OBJCOPY) -O verilog $^ $@

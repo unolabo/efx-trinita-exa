@@ -5,9 +5,7 @@
 下記 Example Design では、Trinita Core に Bootloader が実装されています。
 
 - [T20 BGA256 Development Board 用 1 ステージ Bootloader Example Design](./example_t20_1stg_bootloader)
-- [T20 BGA256 Development Board 用 2 ステージ Bootloader Example Design](./example_t20_2stg_bootloader)
 - [Ti60 F225 Development Board 用 1 ステージ Bootloader Example Design](./example_ti60_1stg_bootloader)
-- [Ti60 F225 Development Board 用 2 ステージ Bootloader Example Design](./example_ti60_2stg_bootloader)
 
 ユーザは、ソフトウェアを Flash Memory の特定のアドレスに書き込むことで、FPGA デザインをコンパイルすることなく、ソフトウェアを差し替えることができます。
 
@@ -88,10 +86,38 @@ FPGA デザインをコンパイルせずに、ユーザソフトウェアをビ
 Bootloader を変更しない場合は編集不要です。
 
 ```
-MEMORY {
-    ROM (rx)  : ORIGIN = 0xF9000000, LENGTH = 0x7800
-    RAM (rwx) : ORIGIN = 0xF9080000, LENGTH = 0x7800
+OUTPUT_ARCH( "riscv" )
+
+ENTRY( _start )
+
+MEMORY
+{
+  rom  (rx) : ORIGIN = 0xF9000000, LENGTH = 30K
+  ram  (wxai!r) : ORIGIN = 0xF9080000, LENGTH = 30K
 }
+
+PHDRS
+{
+  rom PT_LOAD;
+  ram PT_LOAD;
+}
+
+SECTIONS
+{
+  __stack_size = DEFINED(__stack_size) ? __stack_size : 8192;
+
+  . = 0xF9000000;
+  .rom_section.init           :
+  {
+    KEEP (*(SORT_NONE(.init)))
+  } >rom AT>rom :rom
+
+  .rom_section.text           :
+  {
+    *(.text.Proc_1);
+    *(.text.Proc_2);
+    
+    (以下略)
 ```
 
 
@@ -161,38 +187,40 @@ Example Design では Bootloader のビルドは不要です。
 下記のように Bootloader の配置場所 (命令メモリ / データメモリのアドレス) とサイズが定義されていますので、適宜変更してください。
 
 ```
-MEMORY {
-    ROM (rx)  : ORIGIN = 0xF9007800, LENGTH = 2048
-    RAM (rwx) : ORIGIN = 0xF9087800, LENGTH = 2048
+OUTPUT_ARCH( "riscv" )
+
+ENTRY( _start )
+
+MEMORY
+{
+  rom  (rx) : ORIGIN = 0xF9007800, LENGTH = 2K
+  ram  (wxai!r) : ORIGIN = 0xF9087800, LENGTH = 2K
 }
+
+PHDRS
+{
+  rom PT_LOAD;
+  ram PT_LOAD;
+}
+
 SECTIONS
 {
-  . = 0xF9007800;
-  .text.init : {} > ROM
-  . = 0x00000040;
-  .text : {} > ROM
-  . = 0xF9087800;
-  . = ALIGN(4);
-  .rodata : {} > RAM
-  . = ALIGN(4);
-  .data : {} > RAM
-  . = ALIGN(4);
-  _bss_start = .
-;  .bss : {} > RAM
-  . = ALIGN(4);
-  _bss_end = .;
-  . = ALIGN(4);
-  end = .;
-  _end = .;
-}
-```
+  __stack_size = DEFINED(__stack_size) ? __stack_size : 1024;
 
+  . = 0xF9007800;
+  .rom_section.init           :
+  {
+    KEEP (*(SORT_NONE(.init)))
+  } >rom AT>rom :rom
+  
+  (以下略)
+```
 
 ### 3. ビルドする
 
 RISC-V IDE で bootloader のプロジェクトをインポートし、ビルドしてエラーが発生しないことを確認します。
 
-※ プロジェクトは ./embedded_sw/sap/software/standalone/bootloader です。
+※ プロジェクトは ./embedded_sw/sap/software/standalone/bootloader_Trinita です。
 
 ![](./images/boot_7.png)
 
