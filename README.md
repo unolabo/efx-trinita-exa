@@ -8,7 +8,6 @@
 - ソフトウェアを Flash Memory に格納し、Bootloader を使用して起動する方法は下記ドキュメントを参照してください。
   - [Bootloader によるソフトウェアの起動](./README_Bootloader.md)
 
-
 ## 概要
 
 このコアは Efinix FPGA Sapphire SoC 向けの 1ステージ RISC-V コアです。
@@ -24,15 +23,16 @@ Efinity の コンパイルパラメータ (VerilogHDL マクロ) 定義によ�
 
 ![image](./images/top_blockdiagram.png)
 
-
 ## 動作環境
 
 ### ハードウェア
+
 - Efinix 社 Trion FPGA または Titanium FPGA
 
 ※後述の Example Design では Trion シリーズ T8 / T20, Titanium シリーズ Ti60 だけに言及していますが、同シリーズの他のデバイスにも実装可能です。
 
 ### ソフトウェア
+
 - Efinix 社 Efinity IDE 2023.2~
 - Efinix 社 RISC-V IDE 2023.1~
 - Python 実行環境
@@ -51,18 +51,18 @@ Trinita Core の性能評価用として、各種評価ボード向けの Exampl
 
 ## 制約事項
 
-| 項目   | 内容   |
-| ------ | ------ |
-| 動作時間  | 無償評価版のみ 1 時間 |
-| 動作周波数  |  Trion T8 : 8 MHz <br> Trion T20 : 25 MHz <br> Titanium シリーズ : 75 MHz  |
-| オンチップメモリ容量  |  64KB (imem 32KB + dmem 32KB)  |
-| メモリ先頭アドレス | imem : 0xF900_0000 <br> dmem : 0xF908_0000 |
+| 項目                 | 内容                                                                            |
+| -------------------- | ------------------------------------------------------------------------------- |
+| 動作時間             | 無償評価版のみ 1 時間                                                           |
+| 動作周波数           | Trion T8 : 8 MHz`<br>` Trion T20 : 25 MHz `<br>` Titanium シリーズ : 75 MHz |
+| オンチップメモリ容量 | 64KB (imem 32KB + dmem 32KB)                                                    |
+| メモリ先頭アドレス   | imem : 0xF900_0000`<br>` dmem : 0xF908_0000                                   |
 
 ## 性能参考値
 
 ※ Titanium Ti60 Development Board による測定結果
 ※ 動作周波数は 75 MHz
-※ オンチップメモリ容量は 64KB (imem 32KB + dmem 32KB) 
+※ オンチップメモリ容量は 64KB (imem 32KB + dmem 32KB)
 
 Efinix Sapphire SoC の動作周波数は 20 ~ 400MHz ですが、Trinita Core は実行効率が向上しているため動作周波数を下げています。
 
@@ -72,11 +72,11 @@ Efinix Sapphire SoC の動作周波数は 20 ~ 400MHz ですが、Trinita Core �
 
 ※ 当社比の数値です。実装条件によって値は変動します。
 
-| コア | キャッシュ | DMIPS/MHz |
-| ------ | ------ | ---------- |
-| Efinix VexRiscv | 無し | 0.86 |
-| Efinix VexRiscv | 有り | 1.05 |
-| Uno Lab. Trinita | 無し | 1.44 |
+| コア             | キャッシュ | DMIPS/MHz |
+| ---------------- | ---------- | --------- |
+| Efinix VexRiscv  | 無し       | 0.86      |
+| Efinix VexRiscv  | 有り       | 1.05      |
+| Uno Lab. Trinita | 無し       | 1.44      |
 
 #### Efinix FPGA リソース使用量
 
@@ -84,12 +84,14 @@ Efinix Sapphire SoC の動作周波数は 20 ~ 400MHz ですが、Trinita Core �
 
 ※ 下表は CPU コアのみの数値であり、実際に使う場合は IMEM, DMEM, Peripheral 等の使用量が追加されます。
 
-| コア | キャッシュ | CPUレジスタ | FFs | LTUs | RAMs |
-| ------ | ------ | ------ | ---------- | ---------- | ---------- |
-| Efinix VexRiscv | 無し | FF | 1312 | 1926 | 4 |
-| Efinix VexRiscv | 有り | FF | 1666 | 2400 | 23 |
-| Uno Lab. Trinita | 無し | BRAM |  749 | 2551 | 4 |
-| Uno Lab. Trinita | 無し | FF   | 1739 | 4217 | 0 |
+※ Ti60 におけるリソース使用量です
+
+| コア             | キャッシュ | CPUレジスタ | FFs  | LTUs  | RAMs |
+| ---------------- | ---------- | ----------- | ---- | ----- | ---- |
+| Efinix VexRiscv  | 無し       | FF          | 1180 | 1954  | 4    |
+| Efinix VexRiscv  | 有り       | FF          | 1502 | 2382  | 16   |
+| Uno Lab. Trinita | 無し       | BRAM        | 685  | 2219  | 4    |
+| Uno Lab. Trinita | 無し       | FF          | 1675 | 3803  | 0    |
 
 ## Trinita 1stage Core 実装 (差し替え) 手順
 
@@ -119,7 +121,6 @@ python sap2tri.py sap.v
 ```
 
 5. sap.v を ./ip/sap フォルダにコピーします。(上書き)
-
 
 ### 3. トップデザインにクロックを追加する
 
@@ -181,7 +182,6 @@ python sap2tri.py sap.v
 
 ```
 
-
 2. プロジェクトに ./rtlip/vr_wrapper_efinix_time_encrypted.v を追加します。
 
 ![image](./images/efx_project_add.png)
@@ -203,20 +203,18 @@ python sap2tri.py sap.v
 
 ![image](./images/bin2hex.png)
 
-
 ### 6. Efinity でコンパイルする
 
 Efinity でコンパイルを実行します。
 
 ![image](./images/compile.png)
 
-----
+---
 
 ## 問い合わせ先
 
-
-|   | リンク先 |
-| ------ | ------ |
-| Trinita IP コア 開発元・技術問い合わせ | [株式会社ウーノラボ ](https://www.unolabo.co.jp/) |
+|                                          | リンク先                                                                           |
+| ---------------------------------------- | ---------------------------------------------------------------------------------- |
+| Trinita IP コア 開発元・技術問い合わせ   | [株式会社ウーノラボ ](https://www.unolabo.co.jp/)                                     |
 | Efinix FPGA / 評価ボードのオンライン購入 | [コアスタッフ Efinix製品ページ](https://www.zaikostore.com/zaikostore/special/EFINIX) |
-| Efinix FPGA 取扱代理店 | [加賀デバイス株式会社](https://www.kgdev.co.jp/category/column/efinix/) |
+| Efinix FPGA 取扱代理店                   | [加賀デバイス株式会社](https://www.kgdev.co.jp/category/column/efinix/)               |
