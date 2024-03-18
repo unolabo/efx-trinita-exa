@@ -54,9 +54,9 @@ Trinita Core の性能評価用として、各種評価ボード向けの Exampl
 | 項目                 | 内容                                                                            |
 | -------------------- | ------------------------------------------------------------------------------- |
 | 動作時間             | 無償評価版のみ 1 時間                                                           |
-| 動作周波数           | Trion T8 : 8 MHz`<br>` Trion T20 : 25 MHz `<br>` Titanium シリーズ : 75 MHz |
+| 動作周波数           | Trion T8 : 8 MHz <br> Trion T20 : 25 MHz <br> Titanium シリーズ : 75 MHz |
 | オンチップメモリ容量 | 64KB (imem 32KB + dmem 32KB)                                                    |
-| メモリ先頭アドレス   | imem : 0xF900_0000`<br>` dmem : 0xF908_0000                                   |
+| メモリ先頭アドレス   | imem : 0xF900_0000 <br> dmem : 0xF908_0000                                   |
 
 ## 性能参考値
 
@@ -102,7 +102,7 @@ Efinix Sapphire SoC の動作周波数は 20 ~ 400MHz ですが、Trinita Core �
 
 ※ 置き換え手順は YouTube でも公開しています。あわせて参照下さい。
 
-[![手順説明動画](http://img.youtube.com/vi/jB3CG8YiAmk/0.jpg)](https://youtu.be/jB3CG8YiAmk)
+[![手順説明動画](http://img.youtube.com/vi/6zQXcA6hQyI/0.jpg)](https://youtu.be/6zQXcA6hQyI)
 
 ### 1. テンプレートをコピーする
 
