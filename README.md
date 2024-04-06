@@ -74,9 +74,9 @@ Efinix Sapphire SoC の動作周波数は 20 ~ 400MHz ですが、Trinita Core �
 
 | コア             | キャッシュ | DMIPS/MHz |
 | ---------------- | ---------- | --------- |
-| Efinix VexRiscv  | 無し       | 0.86      |
-| Efinix VexRiscv  | 有り       | 1.05      |
-| Uno Lab. Trinita | 無し       | 1.44      |
+| Efinix VexRiscv  | 無し       | 1.08      |
+| Efinix VexRiscv  | 有り       | 1.34      |
+| Uno Lab Trinita 1stage CPUレジスタBRAM | 無し       | 1.79      |
 
 #### Efinix FPGA リソース使用量
 
