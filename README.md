@@ -19,7 +19,6 @@ Efinix Sapphire SoC の Vex RISC-V コアを差し替えて使います。
 Efinity の コンパイルパラメータ (VerilogHDL マクロ) 定義によって、下記のオプションを使用できます。
 
 - CPU レジスタ実装方法 : Block RAM または FF の選択
-- Embedded 命令セットへの対応 (T8 のみ)
 
 ![image](./images/top_blockdiagram.png)
 
@@ -45,7 +44,7 @@ Trinita Core の性能評価用として、各種評価ボード向けの Exampl
 
 評価ボードですぐに動作確認できる、コンパイル済みのバイナリ (.hex) も同梱しています。
 
-- T8 Xyloni Development Board 用 Example Design (準備中)
+- [T8 Xyloni 用 Example Design](./example_xyloni_1stg)
 - [T20 BGA256 Development Board 用 Example Design](./example_t20_1stg)
 - [Ti60 F225 Development Board 用 Example Design](./example_ti60_1stg)
 
@@ -55,14 +54,14 @@ Trinita Core の性能評価用として、各種評価ボード向けの Exampl
 | -------------------- | ------------------------------------------------------------------------------- |
 | 動作時間             | 無償評価版のみ 1 時間                                                           |
 | 動作周波数           | Trion T8 : 10 MHz <br> Trion T20 : 25 MHz <br> Titanium シリーズ : 75 MHz |
-| オンチップメモリ容量 | 64KB (imem 32KB + dmem 32KB)                                                    |
+| オンチップメモリ容量 | Trion T8 : 8KB (imem 4KB + dmem 4KB) <br> Trion T20 : 64KB (imem 32KB + dmem 32KB) <br>  Titanium シリーズ : 64KB (imem 32KB + dmem 32KB) |
 | メモリ先頭アドレス   | imem : 0xF900_0000 <br> dmem : 0xF908_0000                                   |
 
 ## 性能参考値
 
-※ Titanium Ti60 Development Board による測定結果
-※ 動作周波数は 75 MHz
-※ オンチップメモリ容量は 64KB (imem 32KB + dmem 32KB)
+※ Titanium Ti60 Development Board による測定結果<br>
+※ 動作周波数は 75 MHz<br>
+※ オンチップメモリ容量は 64KB (imem 32KB + dmem 32KB)<br>
 
 Efinix Sapphire SoC の動作周波数は 20 ~ 400MHz ですが、Trinita Core は実行効率が向上しているため動作周波数を下げています。
 
