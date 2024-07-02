@@ -5,6 +5,7 @@
 - **本ソースコードの使用にあたり [ライセンス](./LICENSE) に同意頂く必要がございます。**
   - 本リポジトリの一部または全部を Clone / Download した時点で、ライセンス条項に同意したものとみなします。
 - 本ドキュメントの pdf 版は [こちら](./README.pdf) です。
+- 説明用スライド pdf 版は [こちら](./TrinitaTutorial_Slide.pdf) です。
 - ソフトウェアを Flash Memory に格納し、Bootloader を使用して起動する方法は下記ドキュメントを参照してください。
   - [Bootloader によるソフトウェアの起動](./README_Bootloader.md)
 
@@ -139,6 +140,10 @@ python sap2tri.py sap.v
 4. Efinity Interface Designer を開き、PLL に io_systemClk2, io_systemClk3 を追加します。
 
 - io_systemClk2, io_systemClk3 の推奨位相は下記のとおりです。
+  - Trion T8 10 MHz
+    - io_systemClk : 0 deg
+    - io_systemClk2 : 252 deg
+    - io_systemClk3 : 108 deg
   - Trion T20 25 MHz
     - io_systemClk : 0 deg
     - io_systemClk2 : 270 deg  (io_systemClk3 の反転クロック)
@@ -147,6 +152,46 @@ python sap2tri.py sap.v
     - io_systemClk : 0 deg
     - io_systemClk2 : 225 deg
     - io_systemClk3 : 90 deg
+
+**※ T8 については 100 MHz を PLL で生成し、Logic による分周で各クロックを生成することをお勧めします。(PLL のクロック出力本数が足りないため)**
+
+```
+    //T8 クロック生成の例
+    reg  io_systemClk;
+    reg  io_systemClk2;
+    reg  io_systemClk3;
+    
+    reg [3:0] cntdiv;
+    always@(posedge CLK or negedge io_pllLocked)
+    begin
+      if (~io_pllLocked) begin
+        cntdiv <= 0;
+      end else if (cntdiv==9) begin
+        cntdiv <= 0;
+      end else begin
+        cntdiv <= cntdiv + 1;
+      end
+    end
+    
+    always@(posedge CLK or negedge io_pllLocked)
+    begin
+      if (~io_pllLocked) begin
+        io_systemClk  <= 0;
+        io_systemClk2 <= 0;
+        io_systemClk3 <= 0;
+      end else begin
+        if      (cntdiv==0) io_systemClk <= 1;
+        else if (cntdiv==5) io_systemClk <= 0;
+        
+        if      (cntdiv==3) io_systemClk3 <= 1;
+        else if (cntdiv==8) io_systemClk3 <= 0;
+        
+        if      (cntdiv==6) io_systemClk2 <= 1;
+        else if (cntdiv==1) io_systemClk2 <= 0;
+      end
+    end
+```
+
 
 5. constraint.sdc に io_systemClk2, io_systemClk3 の定義を追加します。
 
