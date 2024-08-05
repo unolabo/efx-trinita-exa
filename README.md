@@ -111,16 +111,15 @@ Efinix Sapphire SoC の動作周波数は 20 ~ 400MHz ですが、Trinita Core �
 
 ### 2. Sapphire SoC ソースコードの VexRiscV コアを Trinita コアに置き換える
 
-1. templete
-2. ./ip/sap フォルダの sap.v を ./convtrinita フォルダにコピーします。
-3. コマンドプロンプトを開き ./convtrinita フォルダに移動します。
-4. 下記コマンドを実行します。このコマンドによって、sap.v の VexRiscV コアが Trinita コアに置き換わります。
+1. ./ip/sap フォルダの sap.v を ./convtrinita フォルダにコピーします。
+2. コマンドプロンプトを開き ./convtrinita フォルダに移動します。
+3. 下記コマンドを実行します。このコマンドによって、sap.v の VexRiscV コアが Trinita コアに置き換わります。
 
 ```
 python sap2tri.py sap.v
 ```
 
-5. sap.v を ./ip/sap フォルダにコピーします。(上書き)
+4. sap.v を ./ip/sap フォルダにコピーします。(上書き)
 
 ### 3. トップデザインにクロックを追加する
 
