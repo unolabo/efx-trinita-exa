@@ -109,7 +109,7 @@ Efinix Sapphire SoC の動作周波数は 20 ~ 400MHz ですが、Trinita Core �
 - template フォルダに格納されているファイル・フォルダを、プロジェクトフォルダにコピーします。
 - Sapphire SoC のインスタンス名が sap 以外である場合、templete/embedded_sw/sap 配下のフォルダを、お使いのインスタンス名のフォルダ配下にコピーしてください。
 
-### 2. Sapphire SoC ソースコードの VexRiscV コアの Trinita コアに置き換える
+### 2. Sapphire SoC ソースコードの VexRiscV コアを Trinita コアに置き換える
 
 1. templete
 2. ./ip/sap フォルダの sap.v を ./convtrinita フォルダにコピーします。
