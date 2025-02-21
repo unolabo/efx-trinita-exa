@@ -29,7 +29,7 @@
 
 ## 動画
 
-[![手順説明動画](http://img.youtube.com/vi/0-CccOJGw-A/0.jpg)](https://youtu.be/0-CccOJGw-A)
+[![手順説明動画](http://img.youtube.com/vi/M33dlqy_PgY/0.jpg)](https://youtu.be/M33dlqy_PgY)
 
 
 
@@ -227,20 +227,15 @@ RISC-V IDE で bootloader のプロジェクトをインポートし、ビルド
 
 ### 4. Bootloader を FPGA イメージに埋め込む
 
-1. ビルドして生成された imem.bin / dmem.bin を ./romdata 配下にコピーします。
 
-2. ./romdata 配下の bin2hex_bootloader.bat を編集します。
+1. コマンドプロンプトを開き、Efinity Project にカレントディレクトリを移動し、次のコマンドを実行します。  
+※引数 "--boot" が必要です。
+これで romdata 配下に FPGA イメージに埋め込む RAM の初期値ファイル (.hex) が生成されます。
 
-imem / dmem それぞれの先頭アドレスと、bootloader 領域のアドレスを python スクリプトに与えています。
 
-```bat
-python .\trinitaHexGen.py .\imem.bin 0xF9000000 0xF9007800
-python .\trinitaHexGen.py .\dmem.bin 0xF9080000 0xF9087800
 ```
-
-3. bin2hex_bootloader.bat を実行します。
-
-これで FPGA イメージに埋め込む内部 RAM の hex ファイルが生成されます。
+python conv_tri_mem.py ./embedded_sw/sap/software/standalone/bootloader_Trinita/build --boot
+```
 
 
 ### 5. .vh ファイルを編集する

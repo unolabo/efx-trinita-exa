@@ -54,9 +54,21 @@ Trinita Core の性能評価用として、各種評価ボード向けの Exampl
 | 項目                 | 内容                                                                            |
 | -------------------- | ------------------------------------------------------------------------------- |
 | 動作時間             | 無償評価版のみ 1 時間                                                           |
-| 動作周波数           | Trion T8 : 10 MHz <br> Trion T20 : 25 MHz <br> Titanium シリーズ : 75 MHz |
+| 動作周波数           | Trion T8 : 12.5 MHz <br> Trion T20 : 25 MHz <br> Titanium シリーズ : 75 MHz |
 | オンチップメモリ容量 | Trion T8 : 8KB (imem 4KB + dmem 4KB) <br> Trion T20 : 64KB (imem 32KB + dmem 32KB) <br>  Titanium シリーズ : 64KB (imem 32KB + dmem 32KB) |
 | メモリ先頭アドレス   | imem : 0xF900_0000 <br> dmem : 0xF908_0000                                   |
+
+## Sapphire SoC Peripheral 制約事項
+
+2025年2月現在, Sapphire SoC 設定項目のうち下表の設定項目は未サポートです。<br> (将来的にサポートされる可能性があります) <br>
+これらの設定項目は OFF にする (チェックを外す) ようにお願いします。
+
+| タブ                 | 未サポートの設定項目                                                            |
+| -------------------- | ------------------------------------------------------------------------------- |
+| SOC                  | - Cache (Trinita 1stage Core にCacheは不要) <br> - Compressed Extension         |
+| Cache/Memory         | - Include the external memory AXI Interface                                     |
+| Debug                | - RISC-V Standard Debug <br> - Soft Debug Tap                                   |
+
 
 ## 性能参考値
 
@@ -102,7 +114,7 @@ Efinix Sapphire SoC の動作周波数は 20 ~ 400MHz ですが、Trinita Core �
 
 ※ 置き換え手順は YouTube でも公開しています。あわせて参照下さい。
 
-[![手順説明動画](http://img.youtube.com/vi/6zQXcA6hQyI/0.jpg)](https://youtu.be/6zQXcA6hQyI)
+[![手順説明動画](http://img.youtube.com/vi/nwmNSFLWMqQ/0.jpg)](https://youtu.be/nwmNSFLWMqQ)
 
 ### 1. テンプレートをコピーする
 
@@ -111,15 +123,11 @@ Efinix Sapphire SoC の動作周波数は 20 ~ 400MHz ですが、Trinita Core �
 
 ### 2. Sapphire SoC ソースコードの VexRiscV コアを Trinita コアに置き換える
 
-1. ./ip/sap フォルダの sap.v を ./convtrinita フォルダにコピーします。
-2. コマンドプロンプトを開き ./convtrinita フォルダに移動します。
-3. 下記コマンドを実行します。このコマンドによって、sap.v の VexRiscV コアが Trinita コアに置き換わります。
+コマンドプロンプトを開き、下記のコマンドを実行します。このコマンドによって、sap.v の VexRiscV コアが Trinita コアに置き換わります。
 
 ```
-python sap2tri.py sap.v
+python sap2tri.py ./ip/sap/sap.v
 ```
-
-4. sap.v を ./ip/sap フォルダにコピーします。(上書き)
 
 ### 3. トップデザインにクロックを追加する
 
@@ -139,7 +147,7 @@ python sap2tri.py sap.v
 4. Efinity Interface Designer を開き、PLL に io_systemClk2, io_systemClk3 を追加します。
 
 - io_systemClk2, io_systemClk3 の推奨位相は下記のとおりです。
-  - Trion T8 10 MHz
+  - Trion T8 12.5 MHz
     - io_systemClk : 0 deg
     - io_systemClk2 : 252 deg
     - io_systemClk3 : 108 deg
@@ -152,43 +160,34 @@ python sap2tri.py sap.v
     - io_systemClk2 : 225 deg
     - io_systemClk3 : 90 deg
 
-**※ T8 については 100 MHz を PLL で生成し、Logic による分周で各クロックを生成することをお勧めします。(PLL のクロック出力本数が足りないため)**
+**※ T8 については 125MHz を PLL で生成し、Logic による分周で各クロックを生成することをお勧めします。(PLL のクロック出力本数が足りないため)**
 
 ```
     //T8 クロック生成の例
     reg  io_systemClk;
     reg  io_systemClk2;
     reg  io_systemClk3;
+    reg [9:0] cntdiv;
     
-    reg [3:0] cntdiv;
-    always@(posedge CLK or negedge io_pllLocked)
+    (* syn_preserve = "true" *) reg tri_clk_1;
+    (* syn_preserve = "true" *) reg tri_clk_2;
+    (* syn_preserve = "true" *) reg tri_clk_3;
+    
+    always@(posedge clk125m)
     begin
-      if (~io_pllLocked) begin
-        cntdiv <= 0;
-      end else if (cntdiv==9) begin
-        cntdiv <= 0;
-      end else begin
-        cntdiv <= cntdiv + 1;
-      end
+      if (~io_pllResetn)
+        cntdiv <= 10'b0000011111;
+      else
+        cntdiv <= {cntdiv[8:0], cntdiv[9]};
     end
     
-    always@(posedge CLK or negedge io_pllLocked)
+    always@(posedge clk125m)
     begin
-      if (~io_pllLocked) begin
-        io_systemClk  <= 0;
-        io_systemClk2 <= 0;
-        io_systemClk3 <= 0;
-      end else begin
-        if      (cntdiv==0) io_systemClk <= 1;
-        else if (cntdiv==5) io_systemClk <= 0;
-        
-        if      (cntdiv==3) io_systemClk3 <= 1;
-        else if (cntdiv==8) io_systemClk3 <= 0;
-        
-        if      (cntdiv==6) io_systemClk2 <= 1;
-        else if (cntdiv==1) io_systemClk2 <= 0;
-      end
+        io_systemClk <= cntdiv[0];
+        io_systemClk2 <= cntdiv[7];
+        io_systemClk3 <= cntdiv[3];
     end
+    
 ```
 
 
@@ -240,11 +239,13 @@ python sap2tri.py sap.v
 1. RISC-V IDE を起動したら、ワークスペースとして ./embedded_sw/sap を指定します。
 2. gpioDemo_trinita プロジェクトをインポートします。
 3. gpioDemo_trinita/build 配下に imem.bin と dmem.bin が出力されます。
-4. imem.bin と dmem.bin を ./romdata にコピーします。
-5. コマンドプロンプトを開き、./romdata に移動します。
-6. bin2hex.bat をダブルクリックして実行します。
+4. コマンドプロンプトを開き, Efinity Project にカレントディレクトリを移動し、次のコマンドを実行します。 これで romdata/ 配下に imem と dmem の RAM 初期値ファイルが生成されます。
 
-![image](./images/bin2hex.png)
+```
+python conv_tri_mem.py ./embedded_sw/sap/software/standalone/gpioDemo_Trinita/build
+```
+
+
 
 ### 6. Efinity でコンパイルする
 

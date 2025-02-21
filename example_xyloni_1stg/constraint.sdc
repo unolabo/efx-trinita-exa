@@ -1,7 +1,7 @@
-create_clock -period 10.001 CLK
-create_clock -name io_systemClk  -period 100 -waveform { 0 50.005} io_systemClk
-create_clock -name io_systemClk3 -period 100 -waveform { 30.003 80.008} io_systemClk3
-create_clock -name io_systemClk2 -period 100 -waveform { 70.006 20.001} io_systemClk2
+create_clock -period 8 CLK125M
+create_clock -name io_systemClk  -period 80 -waveform {  0 40} io_systemClk
+create_clock -name io_systemClk2 -period 80 -waveform { 56 16} io_systemClk2
+create_clock -name io_systemClk3 -period 80 -waveform { 24 64} io_systemClk3
 
 # GPIO Constraints
 ####################

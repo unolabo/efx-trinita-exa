@@ -1,7 +1,7 @@
 module top
 (
     input  io_asyncResetn,
-    input  CLK,
+    input  CLK125M,
     output io_pllResetn,
     input  io_pllLocked,
     input  pushsw,
@@ -115,35 +115,25 @@ module top
     reg  io_systemClk;
     reg  io_systemClk2;
     reg  io_systemClk3;
+    reg [9:0] cntdiv;
     
-    reg [3:0] cntdiv;
-    always@(posedge CLK or negedge io_pllLocked)
+    (* syn_preserve = "true" *) reg tri_clk_1;
+    (* syn_preserve = "true" *) reg tri_clk_2;
+    (* syn_preserve = "true" *) reg tri_clk_3;
+    
+    always@(posedge CLK125M)
     begin
-      if (~io_pllLocked) begin
-        cntdiv <= 0;
-      end else if (cntdiv==9) begin
-        cntdiv <= 0;
-      end else begin
-        cntdiv <= cntdiv + 1;
-      end
+      if (~io_pllResetn)
+        cntdiv <= 10'b0000011111;
+      else
+        cntdiv <= {cntdiv[8:0], cntdiv[9]};
     end
     
-    always@(posedge CLK or negedge io_pllLocked)
+    always@(posedge CLK125M)
     begin
-      if (~io_pllLocked) begin
-        io_systemClk  <= 0;
-        io_systemClk2 <= 0;
-        io_systemClk3 <= 0;
-      end else begin
-        if      (cntdiv==0) io_systemClk <= 1;
-        else if (cntdiv==5) io_systemClk <= 0;
-        
-        if      (cntdiv==3) io_systemClk3 <= 1;
-        else if (cntdiv==8) io_systemClk3 <= 0;
-        
-        if      (cntdiv==6) io_systemClk2 <= 1;
-        else if (cntdiv==1) io_systemClk2 <= 0;
-      end
+        io_systemClk <= cntdiv[0];
+        io_systemClk2 <= cntdiv[7];
+        io_systemClk3 <= cntdiv[3];
     end
     
     
