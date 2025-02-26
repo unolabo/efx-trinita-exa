@@ -60,6 +60,16 @@ Trinita Core の性能評価用として、各種評価ボード向けの Exampl
 
 ## Sapphire SoC Peripheral 制約事項
 
+### デバッガについて
+
+Trinita では Sapphire SoC の Peripheral をそのまま使えるため、コアを置き換えた後も Sapphire SoC 用のソフトウェアコードをそのまま流用可能です。 <br>
+但し、デバッグ(ステップ実行やブレークポイント等) については、Sapphire RISC-V(VexRiscv) で実行してください。<br>
+
+なお、Peripheral として Sapphire SoC ではなく、ウーノラボが提供する UNO Peripheral を使用される場合は、Open OCD を使ったデバッグが可能です。<br>
+詳細については弊社 (ウーノラボ) にお問い合わせください。
+
+### Sapphire SoC の設定項目について
+
 2025年2月現在, Sapphire SoC 設定項目のうち下表の設定項目は未サポートです。<br> (将来的にサポートされる可能性があります) <br>
 これらの設定項目は OFF にする (チェックを外す) ようにお願いします。
 
